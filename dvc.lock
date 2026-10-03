@@ -35,3 +35,52 @@ stages:
       md5: 73a7cfa0d00a6147f31783cfd5e4aac4.dir
       size: 50785033
       nfiles: 3
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 73a7cfa0d00a6147f31783cfd5e4aac4.dir
+      size: 50785033
+      nfiles: 3
+    - path: src/train.py
+      hash: md5
+      md5: a93976d4540c8261a1a4fc41e15f6923
+      size: 1035
+    params:
+      params.yaml:
+        train.batch_size: 32
+        train.dense_units: 128
+        train.dropout_rate: 0.2
+        train.epochs: 5
+        train.learning_rate: 0.001
+    outs:
+    - path: models/history.csv
+      hash: md5
+      md5: 0142c551647fd19a2047693438df4d92
+      size: 421
+    - path: models/model.h5
+      hash: md5
+      md5: 04b8532542a4ba884e30a5b52941b806
+      size: 1245272
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 73a7cfa0d00a6147f31783cfd5e4aac4.dir
+      size: 50785033
+      nfiles: 3
+    - path: models/model.h5
+      hash: md5
+      md5: 04b8532542a4ba884e30a5b52941b806
+      size: 1245272
+    - path: src/evaluate.py
+      hash: md5
+      md5: a79b5aedacad9f27e1683054f22d361c
+      size: 680
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: df869e6e55450289f52185d3a3156553
+      size: 81
