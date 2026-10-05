@@ -10,8 +10,8 @@ os.makedirs('data/processed', exist_ok=True)
 train_data = np.load('data/raw/train.npz')
 test_data = np.load('data/raw/test.npz')
 
-x_train, y_train = train_data['x'] / 255.0, train_data['y']
-x_test, y_test = test_data['x'] / 255.0, test_data['y']
+x_train, y_train = train_data['x'] / 256.0, train_data['y']
+x_test, y_test = test_data['x'] / 256.0, test_data['y']
 
 x_train, x_val, y_train, y_val = train_test_split(
     x_train, y_train, test_size=params['test_size'], random_state=params['seed']
